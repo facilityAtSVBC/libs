@@ -6,28 +6,6 @@ var setupMap = function() {
     var centerLocal = [-121.940747, 37.360196];
     var contactInfo = '<p>SGI-USA Silicon Valley Buddhist Center<br>1875 De La Cruz Blvd<br>Santa Clara, CA 95050<br>+1 (408) 727-2604</p>';
 
-    // Load Leaflet library
-    var leafletScript = document.createElement('script');
-    leafletScript.src = 'https://unpkg.com/leaflet@1.5.1/dist/leaflet.js';
-    document.head.appendChild(leafletScript);
-
-    // Load Leaflet Pip library
-    var leafletPipScript = document.createElement('script');
-    leafletPipScript.src = 'https://unpkg.com/@mapbox/leaflet-pip@latest/leaflet-pip.js';
-    document.head.appendChild(leafletPipScript);
-
-    // Load Mapbox Geocoder library
-    var mapboxGeocoderScript = document.createElement('script');
-    mapboxGeocoderScript.src = 'https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.0/mapbox-gl-geocoder.min.js';
-    document.head.appendChild(mapboxGeocoderScript);
-
-    // Load Mapbox Geocoder CSS
-    var mapboxGeocoderCssLink = document.createElement('link');
-    mapboxGeocoderCssLink.rel = 'stylesheet';
-    mapboxGeocoderCssLink.href = 'https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.0/mapbox-gl-geocoder.css';
-    mapboxGeocoderCssLink.type = 'text/css';
-    document.head.appendChild(mapboxGeocoderCssLink);
-
     // Create HTML elements
     var mapDiv = document.createElement('div');
     mapDiv.id = 'map';
