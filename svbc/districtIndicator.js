@@ -1,6 +1,6 @@
 // JavaScript file: myscript.js
 
-var setupMap = function() {
+$(document).ready(function() {
     // Variables to change
     var pathToMapData = 'wp-content/uploads/2022/08/sver_svwr_august_2022.geojson';
     var centerLocal = [-121.940747, 37.360196];
@@ -399,4 +399,4 @@ var setupMap = function() {
             centerMessageShown = false;
         });
     });
-}();
+});
