@@ -71,7 +71,7 @@ var setupMap = function() {
     containerDiv.appendChild(infoBoxDiv);
     containerDiv.appendChild(mobileTargetP);
 
-    document.body.getElementById("district_reference_container").appendChild(containerDiv);
+    document.getElementById("district_reference_container").appendChild(containerDiv);
 
     // Mapbox access token
     mapboxgl.accessToken = document.getElementById("district_reference_container").getAttribute("token-value");
