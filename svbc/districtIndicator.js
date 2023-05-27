@@ -71,10 +71,10 @@ var setupMap = function() {
     containerDiv.appendChild(infoBoxDiv);
     containerDiv.appendChild(mobileTargetP);
 
-    document.body.appendChild(containerDiv);
+    document.body.getElementById("district_reference_container").appendChild(containerDiv);
 
     // Mapbox access token
-    mapboxgl.accessToken = document.getElementById("mapbox_access_token").getAttribute("value");
+    mapboxgl.accessToken = document.getElementById("district_reference_container").getAttribute("token-value");
 
     // Get environment URL
     var environmentUrl = document.URL.substring(0, document.URL.indexOf('district-reference'));
