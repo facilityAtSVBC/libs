@@ -95,7 +95,7 @@ containerDiv.appendChild(mobileTargetP);
 document.body.appendChild(containerDiv);
 
 // Mapbox access token
-mapboxgl.accessToken = 'pk.eyJ1Ijoia2VubnktZ2Fqb2thaSIsImEiOiJjanNtbzZwczQwM3A5NDNwMWJuaTZva3ZxIn0.pvjJoHvLps1bGsNaiQ7O-g';
+mapboxgl.accessToken = document.findElementById('mapbox_access_token').innerHTML;
 
 // Get environment URL
 var environmentUrl = document.URL.substring(0, document.URL.indexOf('district-reference'));
