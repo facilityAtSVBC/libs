@@ -2,7 +2,7 @@
 
 document.addEventListener("DOMContentLoaded", function(event) {
     // Variables to change
-    var pathToMapData = 'wp-content/uploads/2022/08/sver_svwr_august_2022.geojson';
+    var pathToMapData = 'wp-content/uploads/2022/08/sver_svwr_august_2024.geojson';
     var centerLocal = [-121.940747, 37.360196];
     var contactInfo = '<p>SGI-USA Silicon Valley Buddhist Center<br>1875 De La Cruz Blvd<br>Santa Clara, CA 95050<br>+1 (408) 727-2604</p>';
 
