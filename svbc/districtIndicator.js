@@ -214,6 +214,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
     function showHighlight(feature) {
         hideHighlight();
         hoveredDistrictId = feature.id;
+        if (hoveredDistrictId == 0) {
+            for (const layer of Object.values(mapGeoFile._layers)) {
+                if (layer.feature.properties.district_name == feature.properties.district_name && layer.feature.properties.chapter_name == feature.properties.chapter_name) {
+                    hoveredDistrictId = layer.feature.id;
+                    break;
+                }
+            }
+        }
         if (hoveredDistrictId) {
             if (hoveredDistrictId == 0) {
                 feature.id = 999;
