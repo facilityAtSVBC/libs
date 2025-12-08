@@ -114,9 +114,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     // Add Mapbox Geocoder control
     map.addControl(new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
-        marker: {
-            color: 'red'
-        },
+        marker: false,
         mapboxgl: mapboxgl
     }));
 
