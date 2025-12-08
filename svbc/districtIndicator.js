@@ -351,7 +351,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     'features': [{
                         'type': 'Feature',
                         'geometry': {
-                            'coordinates': [-121.940618, 37.360246],
+                            'coordinates': centerLocal,
                             'type': 'Point'
                         }
                     }]
