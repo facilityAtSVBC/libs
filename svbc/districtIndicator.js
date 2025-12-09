@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     // Variables to change
     var pathToMapData = 'wp-content/uploads/2024/01/sver_svwr_january_2024.geojson';
     var centerLocal = [-121.9950888, 37.3810814];
-    var contactInfo = '<p>SGI-USA Silicon Valley Buddhist Center<br>1211 E Arques Ave<br>Sunnyvale, CA 95085</p>';
+    var contactInfo = '<p>SGI-USA Silicon Valley Buddhist Center<br>1211 E Arques Ave<br>Sunnyvale, CA 95085<br>(408) 727-2607</p>';
 
     // Create HTML elements
     var mapDiv = document.createElement('div');
