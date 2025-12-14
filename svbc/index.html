@@ -1,27 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Rotator (Aspect Ratio Safe)</title>
     <style>
-        /* Changed background to white for consistency */
-        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #ffffff; }
-        
-        .container { display: flex; height: 100vh; width: 100vw; }
-        
-        iframe { 
-            flex: 1; 
-            border: none; 
+        /* General Setup: Full screen, no margins/scrolling */
+        body, html { 
+            margin: 0; 
+            padding: 0; 
             height: 100%; 
+            /* Hide scrollbars just in case content slightly overflows */
+            overflow: hidden; 
+            background: #ffffff; 
+        }
+        
+        /* Container: Takes up the whole viewport and centers content */
+        .container { 
+            display: flex; 
+            height: 100vh; /* 100% of viewport height (full screen) */
+            width: 100vw;  /* 100% of viewport width (full screen) */
+            justify-content: center; /* Center horizontally */
+            align-items: center;     /* Center vertically */
+        }
+        
+        /* Styles for the IFRAME (used for the dashboard) */
+        #contentFrame { 
+            border: none; 
+            /* Ensures dashboard fills 100% of the container */
             width: 100%; 
+            height: 100%; 
+            background-color: #ffffff; 
+            color-scheme: light; 
+        }
+
+        /* Styles for the IMAGE (used for the FloorMap) */
+        #contentImage {
+            display: none; /* Hidden by default, shown by JS */
             
-            /* ATTEMPT TO FORCE LIGHT MODE */
-            background-color: #ffffff; /* Ensures white background for the image/loading state */
-            color-scheme: light;       /* Tells browser standard form elements/scrollbars should be light */
+            /* **KEY FOR 4K SCALING & RATIO** */
+            max-width: 100%; /* Allows scaling up to the screen width */
+            max-height: 100%; /* Allows scaling up to the screen height */
+            
+            /* This property scales the image up or down to the largest size 
+               that fits entirely within the container, preserving its aspect ratio. */
+            object-fit: contain; 
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <iframe id="mainFrame" src="https://shifts.sgi-siliconvalley.org/dashboard"></iframe>
+        <iframe id="contentFrame" src=""></iframe>
+        <img id="contentImage" alt="Rotator Content">
     </div>
 
     <script>
@@ -29,23 +59,61 @@
         const urls = [
             "https://shifts.sgi-siliconvalley.org/dashboard",
             "https://facilityatsvbc.github.io/libs/svbc/FloorMap.jpg"
+            // Add more URLs here if needed
         ];
         
+        // IMPORTANT: Update this index if you change the order of 'urls'
+        // Index 0 is the dashboard, Index 1 is the image.
+        const IMAGE_URL_INDEX = 1; 
         let currentIndex = 0;
-        const iframe = document.getElementById('mainFrame');
-        const intervalTime = 30000; // 30 seconds
+        
+        const iframe = document.getElementById('contentFrame');
+        const img = document.getElementById('contentImage');
+        const intervalTime = 30000; // 30 seconds (30000 milliseconds)
+        const hardRefreshTime = 300000; // 5 minutes (300000 milliseconds)
 
         // --- TOGGLE LOGIC ---
-        setInterval(function() {
+        function toggleContent() {
             currentIndex = (currentIndex + 1) % urls.length;
-            iframe.src = urls[currentIndex];
-        }, intervalTime);
+            const newUrl = urls[currentIndex];
+            const isImage = currentIndex === IMAGE_URL_INDEX;
+
+            if (isImage) {
+                // Show the image element, hide the iframe, and set the image source
+                iframe.style.display = 'none';
+                img.style.display = 'block';
+                img.src = newUrl;
+            } else {
+                // Show the iframe, hide the image element, and set the iframe source
+                img.style.display = 'none';
+                iframe.style.display = 'block';
+                iframe.src = newUrl;
+            }
+        }
+
+        // --- INITIAL LOAD ---
+        // Apply initial content and styling
+        const initialUrl = urls[currentIndex];
+        const isInitialImage = currentIndex === IMAGE_URL_INDEX;
+        
+        if (isInitialImage) {
+            iframe.style.display = 'none';
+            img.style.display = 'block';
+            img.src = initialUrl;
+        } else {
+            iframe.style.display = 'block';
+            img.style.display = 'none';
+            iframe.src = initialUrl;
+        }
+
+        // Start the rotation interval
+        setInterval(toggleContent, intervalTime);
 
         // --- HARD REFRESH ---
-        // Refresh page every 5 mins
+        // Refresh the entire page every X minutes to prevent memory leaks/stale connections
         setTimeout(function(){
-           window.location.reload(1);
-        }, 300000);
+            window.location.reload(true); // 'true' forces a hard refresh
+        }, hardRefreshTime);
     </script>    
 </body>
 </html>
