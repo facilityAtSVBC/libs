@@ -2,20 +2,47 @@
 <html>
 <head>
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #000; }
+        /* Changed background to white for consistency */
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #ffffff; }
+        
         .container { display: flex; height: 100vh; width: 100vw; }
-        iframe { flex: 1; border: none; height: 100%; width: 100%; }
-        /* iframe { flex: 1; border: none; height: 100%; width: 50%; } */
+        
+        iframe { 
+            flex: 1; 
+            border: none; 
+            height: 100%; 
+            width: 100%; 
+            
+            /* ATTEMPT TO FORCE LIGHT MODE */
+            background-color: #ffffff; /* Ensures white background for the image/loading state */
+            color-scheme: light;       /* Tells browser standard form elements/scrollbars should be light */
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <iframe src="https://shifts.sgi-siliconvalley.org/dashboard"></iframe>
-        
-        <!-- <iframe src="https://www.bbc.com"></iframe> -->
+        <iframe id="mainFrame" src="https://shifts.sgi-siliconvalley.org/dashboard"></iframe>
     </div>
+
     <script>
-        // Refresh the page every 5 minutes (300,000 milliseconds)
+        // --- CONFIGURATION ---
+        const urls = [
+            "https://shifts.sgi-siliconvalley.org/dashboard",
+            "https://facilityatsvbc.github.io/libs/svbc/FloorMap.jpg"
+        ];
+        
+        let currentIndex = 0;
+        const iframe = document.getElementById('mainFrame');
+        const intervalTime = 30000; // 30 seconds
+
+        // --- TOGGLE LOGIC ---
+        setInterval(function() {
+            currentIndex = (currentIndex + 1) % urls.length;
+            iframe.src = urls[currentIndex];
+        }, intervalTime);
+
+        // --- HARD REFRESH ---
+        // Refresh page every 5 mins
         setTimeout(function(){
            window.location.reload(1);
         }, 300000);
