@@ -12,22 +12,20 @@
             background: #ffffff; 
         }
         
-        /* Flex container to hold the side-by-side iframes */
         .container { 
             display: flex; 
             height: 100vh; 
             width: 100vw; 
         }
         
-        /* flex: 1 makes each iframe take up equal available space.
-           Since there are two iframes, they automatically become 50% each.
-        */
         iframe { 
             flex: 1; 
             border: none; 
             height: 100%; 
-            /* Optional: Ensures white background while loading */
-            background-color: #ffffff; 
+            
+            /* FORCE LIGHT MODE SETTINGS */
+            background-color: #ffffff; /* Sets iframe canvas to white */
+            color-scheme: light;       /* Tells browser to render scrollbars/defaults in light mode */
         }
     </style>
 </head>
@@ -39,8 +37,7 @@
     </div>
 
     <script>
-        // --- HARD REFRESH ---
-        // Refresh the whole page every 5 minutes (300,000 ms) to fetch new data
+        // Refresh the whole page every 5 minutes (300,000 ms)
         setTimeout(function(){
            window.location.reload(1);
         }, 300000);
